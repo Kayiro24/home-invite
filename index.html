@@ -6,7 +6,7 @@
 
 <!-- EDIT: page title, description and share preview (these are read by WhatsApp, Google and social apps, so update the date here too when it changes) -->
 <title>Griha Pravesh · The Agrawal Family · 1 December 2026</title>
-<meta name="description" content="The Agrawal Family invites you to their Griha Pravesh on 1 December 2026 at Avinash Chitwan, Kachna Rd, Shankar Nagar, Raipur, Chhattisgarh 492014.">
+<meta name="description" content="The Agrawal Family invites you to their Griha Pravesh on 1 December 2026 at B27, Avinash Chitwan, Kachna Rd, Shankar Nagar, Raipur, Chhattisgarh 492014.">
 <meta name="theme-color" content="#6b0f1a">
 <meta name="color-scheme" content="light">
 <meta name="robots" content="noindex">
@@ -31,7 +31,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Great+Vibes&family=Poppins:wght@300;400;500;600&family=Tiro+Devanagari+Hindi&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Great+Vibes&family=Poppins:wght@300;400;500;600&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap">
 
 <script>document.documentElement.classList.add("js");</script>
 
@@ -1503,11 +1503,42 @@ main, .site-footer { position: relative; z-index: 2; }
 .footer-contact a { color: var(--marigold); font-weight: 600; text-decoration: none; }
 .footer-contact a:hover { text-decoration: underline; }
 .footer-closing {
-  max-width: 34rem;
+  max-width: 40rem;
   margin: 2.6rem auto 0;
   padding-top: 2rem;
   border-top: 1px solid rgba(243, 217, 139, .25);
 }
+.closing-message {
+  margin: 0 0 2.6rem;
+  padding: clamp(1.5rem, 6vw, 2.8rem) clamp(1.2rem, 5vw, 2.8rem);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius);
+  outline: 1px solid rgba(243, 217, 139, .35);
+  outline-offset: 5px;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(232, 116, 30, .12), transparent 60%),
+    #fffaf0;
+  box-shadow: 0 1.6rem 3rem -1.6rem rgba(0, 0, 0, .6);
+  font-family: var(--font-deva);
+  font-size: clamp(1.08rem, 3.9vw, 1.3rem);
+  line-height: 1.95;
+  text-align: left;
+  color: var(--ink);
+}
+.closing-message p { margin: 0 0 1.1em; text-wrap: pretty; }
+.closing-message p span { display: block; text-wrap: balance; }
+.closing-salutation { font-size: 1.12em; color: var(--maroon); }
+.closing-message .closing-couplet {
+  margin: 1.3em 0;
+  padding: .8em 0;
+  border-block: 1px solid rgba(201, 162, 74, .45);
+  font-size: 1.08em;
+  font-style: italic;
+  text-align: center;
+  text-wrap: balance;
+  color: var(--gold-deep);
+}
+.closing-message .closing-signoff { margin: 1.6em 0 0; text-align: right; color: var(--maroon); }
 .footer-love {
   margin: 0;
   font-size: clamp(2.6rem, 10vw, 4rem);
@@ -1868,6 +1899,7 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
     <p class="footer-thanks script gold-foil" data-reveal="fade-up" data-bind="footer.thankYou"></p>
     <p class="footer-contact">For directions or help, call <a id="footerPhone" href="#"></a></p>
     <div class="footer-closing">
+      <article class="closing-message" id="closingMessage" lang="hi" data-reveal="fade-up"></article>
       <p class="footer-love script gold-foil" data-reveal="fade-up" data-bind="footer.signOff"></p>
       <ul class="closing-names" id="closingNames"></ul>
     </div>
@@ -1907,10 +1939,10 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
 
     /* EDIT: venue and map links. Paste a Google Maps link into directionsUrl and an embed link into mapEmbedUrl to pin the exact spot */
     venue: {
-      line1: "Avinash Chitwan, Kachna Rd, Shankar Nagar",
+      line1: "B27, Avinash Chitwan, Kachna Rd, Shankar Nagar",
       line2: "Raipur, Chhattisgarh 492014",
-      directionsUrl: "https://www.google.com/maps/dir/?api=1&destination=Avinash%20Chitwan%2C%20Kachna%20Rd%2C%20Shankar%20Nagar%2C%20Raipur%2C%20Chhattisgarh%20492014",
-      mapEmbedUrl: "https://www.google.com/maps?q=Avinash%20Chitwan%2C%20Kachna%20Rd%2C%20Shankar%20Nagar%2C%20Raipur%2C%20Chhattisgarh%20492014&output=embed"
+      directionsUrl: "https://www.google.com/maps/dir/?api=1&destination=B27%2C%20Avinash%20Chitwan%2C%20Kachna%20Rd%2C%20Shankar%20Nagar%2C%20Raipur%2C%20Chhattisgarh%20492014",
+      mapEmbedUrl: "https://www.google.com/maps?q=B27%2C%20Avinash%20Chitwan%2C%20Kachna%20Rd%2C%20Shankar%20Nagar%2C%20Raipur%2C%20Chhattisgarh%20492014&output=embed"
     },
 
     /* EDIT: host phone number for directions or help. phone = country code + number, digits only */
@@ -1960,9 +1992,24 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
       { title: "Bhojan", hindi: "भोजन", icon: "bhojan", description: "Please stay and share a festive meal with us. Your presence is the best part of the feast." }
     ],
 
-    /* EDIT: footer and closing sign-off. family names appear under signOff in this order */
+    /* EDIT: footer and closing sign-off. message is the Hindi invitation shown above signOff; couplet and signOff lines each start on a new line. family names appear under signOff in this order */
     footer: {
       thankYou: "Thank you for your blessings",
+      message: {
+        salutation: "स्नेही स्वजन,",
+        couplet: [
+          "कुछ सपने घर बन जाते हैं, कुछ पल यादगार बन जाते हैं,",
+          "जब अपनों के कदम किसी नए आशियाने में आते हैं।"
+        ],
+        paragraphs: [
+          "इसी खुशी और उत्साह के साथ, मनीष अग्रवाल परिवार अपने नए घर के शुभारंभ (गृह प्रवेश) के इस खास अवसर पर आपको सपरिवार आमंत्रित करता है।",
+          "आपकी मौजूदगी और शुभकामनाएँ इस खुशी को और भी खूबसूरत बना देंगी।"
+        ],
+        signOff: [
+          "सादर आमंत्रित,",
+          "मनीष अग्रवाल एवं परिवार"
+        ]
+      },
       signOff: "With Love",
       family: [
         "Shrimati Shanti Agrawal",
@@ -2249,6 +2296,17 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
       </li>`;
     }).join("");
     timeline.insertAdjacentHTML("beforeend", items);
+  }
+
+  function renderClosingMessage() {
+    const message = CONFIG.footer.message;
+    const lines = (items) => items.map((line) => `<span>${escapeHtml(line)}</span>`).join("");
+    $("#closingMessage").innerHTML = [
+      `<p class="closing-salutation">${escapeHtml(message.salutation)}</p>`,
+      `<p class="closing-couplet">${lines(message.couplet)}</p>`,
+      ...message.paragraphs.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`),
+      `<p class="closing-signoff">${lines(message.signOff)}</p>`
+    ].join("");
   }
 
   function renderClosingNames() {
@@ -2704,6 +2762,7 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
     bindContent();
     buildTorans();
     renderSchedule();
+    renderClosingMessage();
     renderClosingNames();
     setupNav();
     setupShare();
