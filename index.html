@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
 <!-- EDIT: page title, description and share preview (these are read by WhatsApp, Google and social apps, so update the date here too when it changes) -->
-<title>Griha Pravesh · The Agrawal Family · 1 December 2026</title>
-<meta name="description" content="The Agrawal Family invites you to their Griha Pravesh on 1 December 2026 at B27, Avinash Chitwan, Kachna Rd, Shankar Nagar, Raipur, Chhattisgarh 492014.">
+<title>Griha Pravesh · The Agrawal Family · 21 November 2026</title>
+<meta name="description" content="The Agrawal Family invites you to their Griha Pravesh on 21 November 2026, 1:00 PM at B27, Avinash Chitwan, Kachna Rd, Shankar Nagar, Raipur, Chhattisgarh 492014.">
 <meta name="theme-color" content="#6b0f1a">
 <meta name="color-scheme" content="light">
 <meta name="robots" content="noindex">
@@ -15,7 +15,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Agrawal Family Griha Pravesh">
 <meta property="og:title" content="Griha Pravesh · The Agrawal Family">
-<meta property="og:description" content="Join the Agrawal Family as we step into our new home. 1 December 2026 · Raipur.">
+<meta property="og:description" content="Join the Agrawal Family as we step into our new home. 21 November 2026, 1:00 PM · Raipur.">
 <meta property="og:url" content="https://your-domain.com/">
 <!-- EDIT: share image. Use an absolute URL to a 1200×630 JPG/PNG hosted with the site -->
 <meta property="og:image" content="https://your-domain.com/og-image.jpg">
@@ -24,7 +24,7 @@
 <meta property="og:image:alt" content="Griha Pravesh invitation from the Agrawal Family">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Griha Pravesh · The Agrawal Family">
-<meta name="twitter:description" content="Join the Agrawal Family as we step into our new home. 1 December 2026 · Raipur.">
+<meta name="twitter:description" content="Join the Agrawal Family as we step into our new home. 21 November 2026, 1:00 PM · Raipur.">
 <meta name="twitter:image" content="https://your-domain.com/og-image.jpg">
 
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%236b0f1a'/%3E%3Cpath d='M32 8c7 9 9 16 5 22-2 3-8 3-10 0-4-6-2-13 5-22z' fill='%23ffb627'/%3E%3Cpath d='M32 17c3 4 3 8 1 11-1 1-3 1-4 0-1-3 0-7 3-11z' fill='%23fff3c4'/%3E%3Cpath d='M8 36c4 13 13 19 24 19s20-6 24-19c-7 3-15 5-24 5S15 39 8 36z' fill='%23e8741e'/%3E%3Cpath d='M8 36c7 3 15 5 24 5s17-2 24-5' fill='none' stroke='%23f3d98b' stroke-width='2.5'/%3E%3C/svg%3E">
@@ -1358,6 +1358,72 @@ main, .site-footer { position: relative; z-index: 2; }
 }
 .map-placeholder svg { width: 2.6rem; height: 2.6rem; animation: bob 3s ease-in-out infinite; }
 
+/* RSVP */
+.rsvp { background: var(--ivory); }
+.rsvp .mandala-bg { right: -15rem; bottom: -12rem; }
+.rsvp-grid {
+  display: grid;
+  gap: clamp(1.2rem, 3vw, 2rem);
+  max-width: 52rem;
+  margin: 0 auto;
+}
+@media (min-width: 44em) {
+  .rsvp-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.rsvp-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(1.6rem, 5vw, 2.4rem) clamp(1.2rem, 4vw, 2rem);
+  border-radius: var(--radius);
+  background: #fffdf7;
+  border: 1px solid rgba(201, 162, 74, .55);
+  box-shadow: 0 1.4rem 3rem -2rem rgba(107, 15, 26, .45);
+  text-align: center;
+}
+.rsvp-card::before {
+  content: "";
+  position: absolute;
+  inset: .45rem;
+  border: 1px solid rgba(201, 162, 74, .3);
+  border-radius: calc(var(--radius) - .3rem);
+  pointer-events: none;
+}
+.rsvp-icon {
+  display: grid;
+  place-items: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  margin-bottom: 1rem;
+  border-radius: 50%;
+  background: var(--maroon);
+  color: var(--marigold);
+}
+.rsvp-icon svg { width: 1.4rem; height: 1.4rem; }
+.rsvp-card h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 5vw, 2.1rem);
+  line-height: 1.15;
+  color: var(--maroon);
+}
+.rsvp-phone {
+  margin: .35rem 0 1.4rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: .06em;
+  color: var(--ink-soft);
+}
+.rsvp-actions {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+  gap: .7rem;
+  width: 100%;
+}
+.rsvp-actions .btn { padding-inline: 1rem; white-space: nowrap; }
+
 /* Footer */
 .site-footer {
   position: relative;
@@ -1376,9 +1442,6 @@ main, .site-footer { position: relative; z-index: 2; }
   font-size: clamp(2.2rem, 8vw, 3.4rem);
   line-height: 1.2;
 }
-.footer-contact { margin: 1rem 0 0; font-size: .9rem; color: rgba(247, 236, 214, .8); }
-.footer-contact a { color: var(--marigold); font-weight: 600; text-decoration: none; }
-.footer-contact a:hover { text-decoration: underline; }
 .footer-closing {
   max-width: 34rem;
   margin: 2.6rem auto 0;
@@ -1644,6 +1707,7 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
       <li><a href="#blessings">Blessings</a></li>
       <li><a href="#countdown">Countdown</a></li>
       <li><a href="#venue">Venue</a></li>
+      <li><a href="#rsvp">RSVP</a></li>
     </ul>
   </nav>
 </header>
@@ -1743,7 +1807,7 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
           <h3 data-bind="family.name"></h3>
           <address><span data-bind="venue.line1"></span><br><span data-bind="venue.line2"></span></address>
           <dl class="venue-times">
-            <div><dt>Date</dt><dd data-event-date></dd></div>
+            <div><dt>Date &amp; Time</dt><dd data-event-date></dd></div>
           </dl>
           <div class="venue-actions">
             <a class="btn btn-gold" id="directionsLink" href="#" target="_blank" rel="noopener"><span data-icon="pin"></span>Get Directions</a>          </div>
@@ -1758,6 +1822,19 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
     </div>
   </section>
 
+  <section class="section rsvp" id="rsvp" aria-labelledby="rsvpTitle">
+    <div class="mandala-bg" data-svg="mandala" aria-hidden="true"></div>
+    <div class="container">
+      <div class="section-head">
+        <p class="section-kicker" data-reveal="fade-up">Sampark</p>
+        <h2 class="section-title gold-foil-dark" id="rsvpTitle" data-reveal="fade-up" style="--delay:.1s">RSVP</h2>
+        <p class="section-sub" data-reveal="fade-up" style="--delay:.2s" data-bind="rsvp.note"></p>
+        <span data-reveal="scale" style="--delay:.25s" data-svg="divider"></span>
+      </div>
+      <div class="rsvp-grid" id="rsvpContacts"></div>
+    </div>
+  </section>
+
 </main>
 
 <footer class="site-footer" id="footer">
@@ -1765,7 +1842,6 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
   <div class="container">
     <div class="footer-diya" data-svg="diya" aria-hidden="true"></div>
     <p class="footer-thanks script gold-foil" data-reveal="fade-up" data-bind="footer.thankYou"></p>
-    <p class="footer-contact">For directions or help, call <a id="footerPhone" href="#"></a></p>
     <div class="footer-closing">
       <p class="footer-love script gold-foil" data-reveal="fade-up" data-bind="footer.signOff"></p>
       <ul class="closing-names" id="closingNames"></ul>
@@ -1797,10 +1873,12 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
       name: "The Agrawal Family"
     },
 
-    /* EDIT: event date as YYYY-MM-DD. The weekday and countdown are worked out from it */
+    /* EDIT: event date as YYYY-MM-DD and start time as 24-hour HH:MM. The weekday and countdown are worked out from them; displayTime is the time shown to guests */
     event: {
       title: "Griha Pravesh",
-      date: "2026-12-01",
+      date: "2026-11-21",
+      time: "13:00",
+      displayTime: "1:00 PM",
       tagline: "Join us as we step into our new home."
     },
 
@@ -1812,11 +1890,13 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
       mapEmbedUrl: "https://www.google.com/maps?q=B27%2C%20Avinash%20Chitwan%2C%20Kachna%20Rd%2C%20Shankar%20Nagar%2C%20Raipur%2C%20Chhattisgarh%20492014&output=embed"
     },
 
-    /* EDIT: host phone number for directions or help. phone = country code + number, digits only */
-    contact: {
-      name: "Shri Manish Agrawal",
-      phone: "919329010011",
-      displayPhone: "+91 93290 10011"
+    /* EDIT: RSVP contacts shown as call and WhatsApp cards. phone = country code + number, digits only */
+    rsvp: {
+      note: "Kindly let us know you are coming. Call or WhatsApp us anytime.",
+      contacts: [
+        { name: "Manish Agrawal", phone: "919329010011", displayPhone: "+91 93290 10011" },
+        { name: "Ayush Agrawal", phone: "919966657000", displayPhone: "+91 99666 57000" }
+      ]
     },
 
     /* EDIT: background music. The song file lives at music/song.mp3 next to index.html; src must match its exact filename. The button hides itself if the file is missing. fadeInMs is how long the volume takes to rise after the gate tap */
@@ -1830,7 +1910,7 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
     /* EDIT: text used when guests share the invitation. url "" means the current page address */
     share: {
       url: "",
-      text: "The Agrawal Family invites you to their Griha Pravesh on 1 December 2026 in Raipur."
+      text: "The Agrawal Family invites you to their Griha Pravesh on 21 November 2026, 1:00 PM in Raipur."
     },
 
     /* EDIT: shlok and the Hindi invitation message shown in Blessings. couplet and signOff lines each start on a new line */
@@ -1865,10 +1945,10 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
       thankYou: "Thank you for your blessings",
       signOff: "With Love",
       family: [
-        "Shrimati Shanti Agrawal",
-        "Shri Manish Agrawal & Shrimati Rashmi Agrawal",
+        "Smt. Shanti Agrawal",
+        "Manish Agrawal & Rashmi Agrawal",
         "Poorva Agrawal",
-        "Ayushk Agrawal"
+        "Ayush Agrawal"
       ]
     }
   };
@@ -1885,17 +1965,25 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
     const [year, month, day] = CONFIG.event.date.split("-").map(Number);
     return new Date(year, month - 1, day + offset);
   };
+  const eventStart = () => {
+    const [hours, minutes] = CONFIG.event.time.split(":").map(Number);
+    const date = eventDay();
+    date.setHours(hours, minutes);
+    return date;
+  };
   const formatEventDate = () => {
     const date = eventDay();
     const weekday = date.toLocaleDateString("en-GB", { weekday: "long" });
     const month = date.toLocaleDateString("en-GB", { month: "long" });
-    return `${weekday}, ${date.getDate()} ${month} ${date.getFullYear()}`;
+    return `${weekday}, ${date.getDate()} ${month} ${date.getFullYear()} · ${CONFIG.event.displayTime}`;
   };
 
   const ICONS = {
     pin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.6"/></svg>',
     share: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5.5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="18.5" r="2.6"/><path d="m8.3 10.8 7.4-4M8.3 13.2l7.4 4"/></svg>',
-    music: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.6"/><circle cx="17.5" cy="16" r="2.6"/></svg>'
+    music: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.6"/><circle cx="17.5" cy="16" r="2.6"/></svg>',
+    phone: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16.4v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 1.1 3.7 2 2 0 0 1 3.1 1.5h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L7.1 9.4a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>',
+    whatsapp: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5 4.8 16A8.6 8.6 0 1 1 8 19.3z"/><path d="M9.2 8.6c0 3.3 2.9 6.2 6.2 6.2l.9-1.6-2-.9-.9.8a4.5 4.5 0 0 1-2.5-2.5l.8-.9-.9-2z"/></svg>'
   };
 
   const marigold = (cy, outer, inner) =>
@@ -2264,11 +2352,7 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
     $$("[data-event-date]").forEach((element) => {
       element.textContent = formatEventDate();
     });
-    $("#heroDate").setAttribute("datetime", CONFIG.event.date);
-
-    const phone = $("#footerPhone");
-    phone.href = `tel:+${CONFIG.contact.phone}`;
-    phone.textContent = `${CONFIG.contact.name} · ${CONFIG.contact.displayPhone}`;
+    $("#heroDate").setAttribute("datetime", `${CONFIG.event.date}T${CONFIG.event.time}`);
   }
 
   function buildTorans() {
@@ -2310,8 +2394,25 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
       .join("");
   }
 
+  function renderRsvpContacts() {
+    $("#rsvpContacts").innerHTML = CONFIG.rsvp.contacts
+      .map((contact, index) => {
+        const name = escapeHtml(contact.name);
+        return `<article class="rsvp-card" data-reveal="fade-up" style="--delay:${(index * 0.12).toFixed(2)}s">
+          <span class="rsvp-icon" aria-hidden="true">${ICONS.phone}</span>
+          <h3>${name}</h3>
+          <p class="rsvp-phone">${escapeHtml(contact.displayPhone)}</p>
+          <div class="rsvp-actions">
+            <a class="btn btn-gold" href="tel:+${contact.phone}" aria-label="Call ${name}">${ICONS.phone}Call</a>
+            <a class="btn btn-outline" href="https://wa.me/${contact.phone}" target="_blank" rel="noopener" aria-label="WhatsApp ${name}">${ICONS.whatsapp}WhatsApp</a>
+          </div>
+        </article>`;
+      })
+      .join("");
+  }
+
   function setupCountdown() {
-    const start = eventDay().getTime();
+    const start = eventStart().getTime();
     const end = eventDay(1).getTime();
     const grid = $("#countdownGrid");
     const done = $("#countdownDone");
@@ -2725,6 +2826,7 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
     buildTorans();
     renderBlessingMessage();
     renderClosingNames();
+    renderRsvpContacts();
     setupNav();
     setupShare();
     setupCountdown();
