@@ -40,8 +40,6 @@
   --maroon: #6b0f1a;
   --maroon-deep: #3f0810;
   --maroon-soft: #8a1c2b;
-  --kumkum: #b3121f;
-  --saffron: #e8741e;
   --marigold: #ffb627;
   --gold: #c9a24a;
   --gold-light: #f3d98b;
@@ -49,7 +47,6 @@
   --ivory: #fffaf0;
   --cream: #f7ecd6;
   --sand: #efdcb8;
-  --teal: #1f6f6b;
   --ink: #3b2416;
   --ink-soft: #6b4a33;
 
@@ -68,7 +65,6 @@
   --safe-b: env(safe-area-inset-bottom, 0px);
   --safe-l: env(safe-area-inset-left, 0px);
 
-  --foil-bright: linear-gradient(100deg, #9c7424 0%, #f3d98b 20%, #c9a24a 36%, #fff3c9 50%, #b8862f 64%, #f3d98b 80%, #9c7424 100%);
   --foil-dark: linear-gradient(100deg, #6e430d 0%, #b9831f 22%, #7c4f12 40%, #d9a441 52%, #6e430d 66%, #b9831f 82%, #6e430d 100%);
   --paper: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .3 0 0 0 0 .15 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
@@ -140,7 +136,8 @@ button { cursor: pointer; }
 
 .script { font-family: var(--font-script); font-weight: 400; }
 
-.gold-foil, .gold-foil-dark {
+.gold-foil-dark {
+  background-image: var(--foil-dark);
   background-size: 260% 100%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -148,8 +145,6 @@ button { cursor: pointer; }
   -webkit-text-fill-color: transparent;
   animation: foil-shimmer 7s linear infinite;
 }
-.gold-foil { background-image: var(--foil-bright); }
-.gold-foil-dark { background-image: var(--foil-dark); }
 
 @keyframes foil-shimmer {
   from { background-position: 0% 50%; }
@@ -201,16 +196,19 @@ button { cursor: pointer; }
   to { transform: skewX(-20deg) translateX(420%); }
 }
 
-.btn-gold {
-  --btn-bg: linear-gradient(135deg, #b8862f 0%, #f3d98b 45%, #d4ab52 70%, #b8862f 100%);
-  color: var(--maroon-deep);
+.btn-maroon {
+  --btn-bg: linear-gradient(135deg, #5c0d17 0%, #8a1c2b 50%, #6b0f1a 100%);
+  border: 1.5px solid var(--gold);
+  color: var(--gold-light);
   font-weight: 600;
-  box-shadow: 0 .5rem 1.4rem -.6rem rgba(138, 100, 32, .8), inset 0 1px 0 rgba(255, 255, 255, .6);
+  box-shadow: 0 .6rem 1.4rem -.6rem rgba(107, 15, 26, .7), inset 0 0 0 3px rgba(107, 15, 26, .9), inset 0 0 0 4px rgba(243, 217, 139, .45);
 }
+.btn-maroon::after { opacity: 1; animation: btn-glint 4.2s ease-in-out infinite 1.5s; }
 .btn-outline {
   border: 1.5px solid var(--gold);
   color: var(--maroon);
-  background: rgba(255, 250, 240, .6);
+  background: rgba(255, 250, 240, .8);
+  box-shadow: inset 0 0 0 3px rgba(255, 250, 240, .9), inset 0 0 0 4px rgba(201, 162, 74, .35);
 }
 .btn-outline:hover, .btn-outline:focus-visible { background: var(--cream); border-color: var(--gold-deep); }
 /* Preloader */
@@ -253,42 +251,11 @@ button { cursor: pointer; }
   to { opacity: 1; transform: scale(1.08); }
 }
 
-.toran {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 3;
-  display: flex;
-  justify-content: center;
-  height: clamp(4.5rem, 8vw, 7.5rem);
-  overflow: hidden;
-  pointer-events: none;
-}
-.toran::before {
-  content: "";
-  position: absolute;
-  top: .35rem;
-  left: 0;
-  right: 0;
-  height: .3rem;
-  background: repeating-linear-gradient(90deg, var(--gold) 0 .6rem, var(--kumkum) .6rem 1.2rem);
-  border-radius: 999px;
-  z-index: 1;
-}
-.toran-unit {
-  flex: 0 0 clamp(2.4rem, 3.2vw, 3.6rem);
-  height: 100%;
-  margin-top: .45rem;
-  transform-origin: 50% 0;
-  animation: sway 3.4s ease-in-out infinite alternate;
-  animation-delay: calc(var(--i, 0) * -.37s);
-}
-.toran-unit svg { width: 100%; height: 100%; }
 @keyframes sway {
   from { transform: rotate(-4deg); }
   to { transform: rotate(4deg); }
 }
+@keyframes slow-spin { to { transform: rotate(360deg); } }
 
 .divider {
   display: block;
@@ -297,6 +264,16 @@ button { cursor: pointer; }
   margin: .9rem auto;
   color: var(--gold);
 }
+
+.leaf-fall {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.intro > .leaf-fall { z-index: 8; }
 
 /* Intro gate */
 .intro {
@@ -726,7 +703,8 @@ button { cursor: pointer; }
   right: 0;
   z-index: 900;
   padding-top: var(--safe-t);
-  background: rgba(63, 8, 16, .94);
+  background: rgba(250, 243, 226, .93);
+  border-bottom: 1px solid rgba(201, 162, 74, .45);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   transform: translateY(-110%);
@@ -734,7 +712,7 @@ button { cursor: pointer; }
 }
 body.is-open .site-header { transform: none; }
 .site-header.is-scrolled, .site-header.is-menu-open {
-  box-shadow: 0 .4rem 1.4rem -.6rem rgba(0, 0, 0, .5);
+  box-shadow: 0 .4rem 1.4rem -.6rem rgba(138, 100, 32, .45);
 }
 .nav {
   display: flex;
@@ -753,7 +731,7 @@ body.is-open .site-header { transform: none; }
   font-weight: 700;
   letter-spacing: .04em;
   text-decoration: none;
-  color: var(--gold-light);
+  color: var(--maroon);
 }
 .brand-diya { width: 2rem; }
 .nav-toggle {
@@ -789,8 +767,9 @@ body.is-open .site-header { transform: none; }
   list-style: none;
   max-height: calc(100svh - var(--header-h) - var(--safe-t));
   overflow-y: auto;
-  background: rgba(63, 8, 16, .97);
-  border-top: 1px solid rgba(243, 217, 139, .25);
+  background: rgba(250, 243, 226, .98);
+  border-top: 1px solid rgba(201, 162, 74, .35);
+  border-bottom: 1px solid rgba(201, 162, 74, .45);
   transform-origin: top;
   transform: scaleY(.85);
   opacity: 0;
@@ -803,14 +782,14 @@ body.is-open .site-header { transform: none; }
   align-items: center;
   min-height: 3rem;
   padding: .3rem .4rem;
-  border-bottom: 1px solid rgba(243, 217, 139, .12);
+  border-bottom: 1px solid rgba(201, 162, 74, .2);
   font-family: var(--font-display);
   font-size: 1.25rem;
   font-weight: 600;
   text-decoration: none;
-  color: var(--cream);
+  color: var(--maroon);
 }
-.nav-menu a.is-active { color: var(--marigold); }
+.nav-menu a.is-active { color: var(--gold-deep); }
 
 @media (min-width: 60em) {
   .nav-toggle { display: none; }
@@ -836,7 +815,7 @@ body.is-open .site-header { transform: none; }
     font-size: .82rem;
     font-weight: 500;
     letter-spacing: .06em;
-    color: var(--cream);
+    color: var(--maroon);
     transition: color .3s;
   }
   .nav-menu a::after {
@@ -846,16 +825,15 @@ body.is-open .site-header { transform: none; }
     right: .8rem;
     bottom: .35rem;
     height: 2px;
-    background: var(--marigold);
+    background: var(--gold);
     transform: scaleX(0);
     transition: transform .35s var(--ease-out);
   }
   .nav-menu a:hover::after, .nav-menu a.is-active::after { transform: scaleX(1); }
-  .nav-menu a:hover, .nav-menu a.is-active { color: var(--marigold); }
+  .nav-menu a:hover, .nav-menu a.is-active { color: var(--gold-deep); }
 }
 
 /* Sections */
-main, .site-footer { position: relative; z-index: 2; }
 .section {
   position: relative;
   padding: clamp(4.5rem, 10vw, 8rem) 0;
@@ -864,6 +842,7 @@ main, .site-footer { position: relative; z-index: 2; }
 @supports (overflow: clip) {
   .section { overflow: clip; }
 }
+.section > .container, .site-footer > .container { position: relative; z-index: 3; }
 .section-head { text-align: center; margin-bottom: clamp(2.2rem, 5vw, 3.5rem); }
 .section-kicker {
   margin: 0;
@@ -871,7 +850,7 @@ main, .site-footer { position: relative; z-index: 2; }
   font-weight: 600;
   letter-spacing: .32em;
   text-transform: uppercase;
-  color: var(--saffron);
+  color: var(--maroon-soft);
 }
 .section-title {
   margin: .3rem 0 0;
@@ -885,31 +864,59 @@ main, .site-footer { position: relative; z-index: 2; }
   margin: .4rem auto 0;
   color: var(--ink-soft);
 }
-.section-dark {
-  color: var(--cream);
-  background:
-    radial-gradient(ellipse at 20% 0%, rgba(232, 116, 30, .22), transparent 55%),
-    radial-gradient(ellipse at 85% 100%, rgba(201, 162, 74, .2), transparent 55%),
-    linear-gradient(180deg, var(--maroon) 0%, var(--maroon-deep) 100%);
-}
-.section-dark .section-kicker { color: var(--marigold); }
-.section-dark .section-sub { color: rgba(247, 236, 214, .82); }
 .section-cream {
   background:
-    radial-gradient(ellipse at 0% 0%, rgba(255, 182, 39, .14), transparent 50%),
-    radial-gradient(ellipse at 100% 100%, rgba(31, 111, 107, .08), transparent 50%),
-    var(--cream);
+    radial-gradient(ellipse at 50% 0%, rgba(255, 252, 240, .85), transparent 60%),
+    linear-gradient(180deg, #f8efdc 0%, #f1e2c2 100%);
 }
 
-.mandala-bg {
+/* Props */
+.prop {
   position: absolute;
-  width: clamp(22rem, 60vw, 46rem);
-  aspect-ratio: 1;
-  opacity: .14;
+  z-index: 1;
   pointer-events: none;
-  animation: slow-spin 120s linear infinite;
 }
-@keyframes slow-spin { to { transform: rotate(360deg); } }
+.prop svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.prop-flip { scale: -1 1; }
+.prop-flip svg { animation-delay: -3s; }
+.prop-leaves {
+  z-index: 6;
+  aspect-ratio: 240 / 260;
+  filter: drop-shadow(0 .5rem .6rem rgba(40, 70, 30, .2));
+}
+.prop-leaves svg { transform-origin: 0 0; animation: leaf-sway 7s ease-in-out infinite alternate; }
+.prop-chhatri { aspect-ratio: 200 / 260; filter: drop-shadow(0 .5rem .8rem rgba(138, 100, 32, .25)); }
+.prop-ghost { opacity: .16; filter: none; }
+.prop-elephant {
+  z-index: 5;
+  aspect-ratio: 208 / 172;
+  filter: drop-shadow(0 .6rem .8rem rgba(90, 60, 20, .25));
+}
+.prop-elephant svg { transform-origin: 50% 100%; animation: elephant-sway 6s ease-in-out infinite alternate; }
+.prop-sprig { aspect-ratio: 60 / 200; }
+.prop-sprig svg { transform-origin: 20% 100%; animation: leaf-sway 6s ease-in-out infinite alternate; }
+.prop-pond {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 6;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(180deg, transparent 45%, rgba(110, 150, 100, .2));
+}
+.prop-pond svg { flex: none; width: auto; aspect-ratio: 3; }
+.prop-pond svg:nth-child(even) { transform: scaleX(-1); }
+.bird {
+  flex: none;
+  width: clamp(1.6rem, 5vw, 3.4rem);
+  aspect-ratio: 60 / 44;
+  translate: 0 -25%;
+  animation: bird-hover 2.6s ease-in-out infinite alternate;
+}
+.bird svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.bird-flip { animation-delay: -1.3s; }
+.bird-flip svg { transform: scaleX(-1); }
 
 /* Reveal system */
 .js [data-reveal] {
@@ -927,60 +934,87 @@ main, .site-footer { position: relative; z-index: 2; }
 
 /* Hero */
 .hero {
+  --arch-w: min(calc(100vw - 1rem), max(min(46rem, 150vh), 62vh));
+  --crown-h: calc(var(--arch-w) * .65);
+  --pillar-w: calc(var(--arch-w) * .075);
+  --strings-h: min(24vh, calc(var(--arch-w) * .34));
+  --bud-w: clamp(.9rem, calc(var(--arch-w) * .04), 3.4rem);
+  --pond-h: clamp(3.4rem, 9vw, 10rem);
+  --elephant-w: clamp(6.5rem, min(30vw, 26vh), 30rem);
+  --chhatri-w: calc(var(--elephant-w) * .62);
+  --leaves-w: clamp(5.5rem, min(26vw, 30vh), 34rem);
   position: relative;
   min-height: 100vh;
   min-height: 100svh;
-  display: grid;
-  place-items: center;
-  padding: calc(var(--safe-t) + var(--header-h) + clamp(5.5rem, 9vw, 8.5rem)) 0 clamp(5rem, 10vw, 7rem);
+  display: flex;
+  justify-content: center;
+  padding-top: calc(var(--safe-t) + var(--header-h));
   overflow: hidden;
   text-align: center;
   background:
-    radial-gradient(ellipse at 50% 38%, rgba(255, 214, 120, .5) 0%, transparent 55%),
-    radial-gradient(ellipse at 0% 100%, rgba(232, 116, 30, .22), transparent 50%),
-    radial-gradient(ellipse at 100% 100%, rgba(179, 18, 31, .14), transparent 50%),
-    linear-gradient(180deg, #fff6e3 0%, var(--ivory) 60%, var(--cream) 100%);
+    radial-gradient(ellipse at 50% 45%, transparent 50%, rgba(138, 100, 32, .2) 100%),
+    linear-gradient(180deg, #f6ecd6 0%, #efdfbd 60%, #e6cf9f 100%);
 }
-.hero .toran { top: calc(var(--header-h) + var(--safe-t)); }
 .hero-title:focus { outline: none; }
-.hero-mandala {
-  top: 50%;
-  left: 50%;
-  margin: calc(clamp(22rem, 60vw, 46rem) / -2) 0 0 calc(clamp(22rem, 60vw, 46rem) / -2);
-  opacity: .16;
+.hero-arch {
+  position: relative;
+  flex: none;
+  width: var(--arch-w);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding:
+    calc(var(--crown-h) * .2 + var(--strings-h) * .64 + .6rem)
+    calc(var(--pillar-w) + var(--arch-w) * .04 + var(--bud-w) + .3rem)
+    calc(var(--pond-h) * .3 + var(--elephant-w) * .83 + .8rem);
 }
-.petals {
+.hero-arch-glow {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-  pointer-events: none;
+  top: calc(var(--crown-h) * .2);
+  bottom: 0;
+  left: var(--pillar-w);
+  right: var(--pillar-w);
+  background:
+    radial-gradient(ellipse at 50% 38%, rgba(255, 255, 255, .9), transparent 62%),
+    linear-gradient(180deg, #fdf8ec 0%, #f8efdc 60%, #f0e0bd 100%);
 }
-.hero-diya {
-  position: absolute;
-  z-index: 2;
-  width: clamp(3rem, 7vw, 6.5rem);
-  pointer-events: none;
+.hero-leaves { top: calc(var(--safe-t) + var(--header-h)); width: var(--leaves-w); }
+.hero-leaves-left { left: 0; }
+.hero-leaves-right { right: 0; }
+.hero-chhatri {
+  bottom: calc(var(--pond-h) * .3);
+  z-index: 4;
+  width: var(--chhatri-w);
 }
-.hero-diya > div { animation: bob 4.5s ease-in-out infinite; }
-.hero-diya-1 { left: 3%; bottom: 5%; }
-.hero-diya-2 { right: 3%; bottom: 5%; }
-.hero-diya-2 > div { animation-delay: -1.6s; }
-.hero-diya-3 { left: 9%; top: 34%; display: none; }
-.hero-diya-3 > div { animation-delay: -.8s; }
-.hero-diya-4 { right: 9%; top: 34%; display: none; }
-.hero-diya-4 > div { animation-delay: -2.4s; }
-@media (min-width: 48em) {
-  .hero-diya-3, .hero-diya-4 { display: block; }
+.hero-chhatri-left { display: none; }
+.hero-chhatri-right { right: calc(50% - var(--arch-w) / 2 + var(--pillar-w) * .4); }
+.hero-elephant { bottom: calc(var(--pond-h) * .25); width: var(--elephant-w); }
+.hero-elephant-left { left: calc(50% - var(--arch-w) / 2 + var(--pillar-w) * .4); }
+.hero-elephant-right { display: none; }
+.hero-pond { height: var(--pond-h); }
+@media (min-aspect-ratio: 1/1) {
+  .hero {
+    --chhatri-w: var(--elephant-w);
+    --strings-h: min(20vh, calc(var(--arch-w) * .3));
+    --pond-h: clamp(3.4rem, min(9vw, 12vh), 10rem);
+  }
+  .hero-arch { padding-bottom: calc(var(--pond-h) + .6rem); }
+  .hero-chhatri-left { display: block; left: max(calc(var(--chhatri-w) * -.3), calc(50% - var(--arch-w) / 2 + var(--pillar-w) * .5 - var(--chhatri-w))); }
+  .hero-chhatri-right { right: max(calc(var(--chhatri-w) * -.3), calc(50% - var(--arch-w) / 2 + var(--pillar-w) * .5 - var(--chhatri-w))); }
+  .hero-elephant-left { left: max(calc(var(--safe-l) + .2rem), calc(50% - var(--arch-w) / 2 - var(--elephant-w) * .6)); }
+  .hero-elephant-right {
+    display: block;
+    right: max(calc(var(--safe-r) + .2rem), calc(50% - var(--arch-w) / 2 - var(--elephant-w) * .5));
+    width: calc(var(--elephant-w) * .85);
+  }
 }
 @keyframes bob {
   0%, 100% { transform: translateY(0) rotate(-1.5deg); }
   50% { transform: translateY(-.9rem) rotate(1.5deg); }
 }
-.hero-content { position: relative; z-index: 3; max-width: 52rem; }
+.hero-content { position: relative; z-index: 4; }
 .hero-shri {
-  margin: 0 0 1rem;
+  margin: 0 0 .6rem;
   font-size: clamp(1.1rem, 3.8vw, 1.6rem);
   color: var(--maroon);
   animation: text-glow 3s ease-in-out infinite alternate;
@@ -996,15 +1030,24 @@ main, .site-footer { position: relative; z-index: 2; }
   margin: .1rem 0 0;
   font-family: var(--font-script);
   font-weight: 400;
-  font-size: clamp(3.6rem, 15vw, 9rem);
-  line-height: 1.05;
+  font-size: clamp(2.6rem, calc(var(--arch-w) * .11), 10rem);
+  line-height: 1.1;
   color: var(--maroon);
   text-shadow: 0 .15rem 0 rgba(255, 255, 255, .8), 0 .6rem 1.6rem rgba(107, 15, 26, .18);
 }
+.hero-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(.5rem, 2vw, 1.2rem);
+  margin-top: max(.5rem, calc(var(--arch-w) * .022));
+}
+.hero-heading .bird { width: clamp(1.6rem, calc(var(--arch-w) * .075), 5rem); translate: 0; }
+.hero-content .divider { margin: .6rem auto; }
 .hero-hindi {
   margin: .2rem 0 0;
   font-size: clamp(1.2rem, 4vw, 1.8rem);
-  color: var(--saffron);
+  color: var(--maroon-soft);
 }
 .hero-label {
   margin: .4rem 0 0;
@@ -1022,14 +1065,14 @@ main, .site-footer { position: relative; z-index: 2; }
   padding: .55rem 1.3rem;
   border: 1px solid rgba(201, 162, 74, .7);
   border-radius: 999px;
-  background: rgba(255, 250, 240, .7);
+  background: rgba(255, 250, 240, .8);
   font-size: clamp(.82rem, 2.6vw, 1rem);
   font-weight: 500;
   color: var(--maroon);
 }
 .hero-tagline {
   max-width: 30rem;
-  margin: 1rem auto 1.6rem;
+  margin: .9rem auto 1.3rem;
   font-family: var(--font-display);
   font-size: clamp(1.15rem, 3.6vw, 1.5rem);
   font-weight: 500;
@@ -1039,8 +1082,8 @@ main, .site-footer { position: relative; z-index: 2; }
 .scroll-cue {
   position: absolute;
   left: 50%;
-  bottom: calc(1rem + var(--safe-b));
-  z-index: 3;
+  bottom: calc(var(--pond-h) * .15 + var(--safe-b));
+  z-index: 7;
   display: grid;
   justify-items: center;
   gap: .3rem;
@@ -1067,7 +1110,7 @@ main, .site-footer { position: relative; z-index: 2; }
   height: 8px;
   margin-left: -2px;
   border-radius: 2px;
-  background: var(--saffron);
+  background: var(--maroon-soft);
   animation: scroll-dot 1.8s ease-in-out infinite;
 }
 @keyframes scroll-dot {
@@ -1075,42 +1118,62 @@ main, .site-footer { position: relative; z-index: 2; }
   30% { opacity: 1; }
   100% { opacity: 0; transform: translateY(.9rem); }
 }
-@media (max-height: 40em) and (max-width: 60em) {
+@media (max-height: 40em) and (max-width: 60em), (max-aspect-ratio: 1/1) {
   .scroll-cue { display: none; }
 }
 
 /* Blessings */
-.blessings { background: var(--ivory); }
-.blessings .mandala-bg { right: -12rem; top: -10rem; }
+.blessings {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 252, 240, .9), transparent 60%),
+    var(--ivory);
+}
 .blessing-card {
+  --sprig-w: clamp(2.2rem, 6vw, 4.4rem);
+  --arch-rise: clamp(5rem, 16vw, 11rem);
   position: relative;
   max-width: 50rem;
   margin: 0 auto;
-  padding: clamp(2.4rem, 7vw, 4.5rem) clamp(1.3rem, 6vw, 4.5rem);
-  border-radius: var(--radius);
+  padding: clamp(4rem, 12vw, 7rem) clamp(1.3rem, 6vw, 4.5rem) clamp(3.4rem, 9vw, 5.5rem);
+  border-radius: 50% 50% var(--radius) var(--radius) / var(--arch-rise) var(--arch-rise) var(--radius) var(--radius);
   background:
-    radial-gradient(ellipse at 50% 0%, rgba(255, 214, 120, .25), transparent 60%),
+    radial-gradient(ellipse at 50% 0%, rgba(255, 214, 120, .22), transparent 60%),
     #fffdf7;
-  border: 1px solid rgba(201, 162, 74, .55);
-  outline: 1px solid rgba(201, 162, 74, .3);
-  outline-offset: -.7rem;
-  box-shadow: 0 1.6rem 3.5rem -2rem rgba(107, 15, 26, .35);
+  border: 1.5px solid var(--gold);
+  box-shadow:
+    inset 0 0 0 .35rem #fffdf7,
+    inset 0 0 0 .42rem rgba(201, 162, 74, .45),
+    0 1.6rem 3.5rem -2rem rgba(107, 15, 26, .3);
   text-align: center;
 }
-.rangoli {
+.blessing-crest {
   position: absolute;
-  width: clamp(3.6rem, 11vw, 7rem);
+  top: 0;
+  left: 50%;
+  width: clamp(3rem, 8vw, 4.6rem);
+  aspect-ratio: 84 / 76;
+  translate: -50% -62%;
+  filter: drop-shadow(0 .3rem .4rem rgba(196, 90, 126, .25));
+}
+.blessing-crest svg { display: block; width: 100%; height: 100%; }
+.blessing-sprig { top: calc(var(--arch-rise) * .35); width: var(--sprig-w); }
+.blessing-sprig-left { left: calc(var(--sprig-w) * -.55); }
+.blessing-sprig-right { right: calc(var(--sprig-w) * -.55); }
+@media (min-width: 60em) {
+  .blessing-sprig { top: 34%; }
+  .blessing-sprig-left { left: calc(var(--sprig-w) * -1.15); }
+  .blessing-sprig-right { right: calc(var(--sprig-w) * -1.15); }
+}
+.filigree {
+  position: absolute;
+  bottom: .5rem;
+  width: clamp(2.4rem, 7vw, 4.6rem);
+  aspect-ratio: 1;
   pointer-events: none;
 }
-.rangoli-tl { top: 0; left: 0; }
-.rangoli-tr { top: 0; right: 0; transform: scaleX(-1); }
-.rangoli-bl { bottom: 0; left: 0; transform: scaleY(-1); }
-.rangoli-br { bottom: 0; right: 0; transform: scale(-1, -1); }
-.rangoli svg { animation: rangoli-breathe 6s ease-in-out infinite alternate; transform-origin: 0 0; }
-@keyframes rangoli-breathe {
-  from { transform: scale(.96); }
-  to { transform: scale(1.04); }
-}
+.filigree svg { display: block; width: 100%; height: 100%; }
+.filigree-left { left: .5rem; }
+.filigree-right { right: .5rem; scale: -1 1; }
 .kalash {
   width: clamp(6.5rem, 18vw, 9rem);
   margin: 0 auto 1rem;
@@ -1150,6 +1213,7 @@ main, .site-footer { position: relative; z-index: 2; }
   color: var(--ink);
 }
 .blessing-message p { margin: 0 0 1.1em; text-wrap: pretty; }
+.blessing-message p:last-child { margin-bottom: 0; }
 .blessing-message p span { display: block; text-wrap: balance; }
 .blessing-salutation { font-size: 1.12em; color: var(--maroon); }
 .blessing-message .blessing-couplet {
@@ -1178,7 +1242,19 @@ main, .site-footer { position: relative; z-index: 2; }
 }
 
 /* Countdown */
-.countdown .mandala-bg { left: -14rem; bottom: -14rem; opacity: .12; }
+.countdown-strings {
+  --arch-w: 32rem;
+  --strings-h: clamp(3.2rem, 9vw, 5.6rem);
+  display: flex;
+  justify-content: space-between;
+  max-width: 40rem;
+  height: var(--strings-h);
+  margin: 0 auto .5rem;
+  padding: 0 clamp(1rem, 7vw, 3.4rem);
+  background:
+    radial-gradient(circle, #fff1b8 0 1px, #c9a24a 1.6px, transparent 2.4px) 0 0 / .7rem 6px repeat-x,
+    linear-gradient(90deg, transparent, #c9a24a 12%, #c9a24a 88%, transparent) 0 1px / 100% 2px no-repeat;
+}
 .countdown-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1187,14 +1263,15 @@ main, .site-footer { position: relative; z-index: 2; }
   margin: 0 auto;
 }
 .cd-unit {
+  --rise: clamp(1.3rem, 5vw, 3rem);
   position: relative;
   display: grid;
   justify-items: center;
-  padding: clamp(.8rem, 3vw, 1.8rem) .3rem clamp(.7rem, 2.4vw, 1.3rem);
-  border-radius: clamp(.7rem, 2vw, 1.2rem);
-  background: linear-gradient(180deg, #fffaf0 0%, #f4e3c1 100%);
+  padding: calc(var(--rise) * .9) .3rem clamp(.7rem, 2.4vw, 1.3rem);
+  border-radius: 50% 50% .7rem .7rem / var(--rise) var(--rise) .7rem .7rem;
+  background: linear-gradient(180deg, #fffdf6 0%, #f6e8c8 100%);
   border: 1.5px solid var(--gold);
-  box-shadow: 0 0 0 4px rgba(243, 217, 139, .12), 0 1rem 2rem -1rem rgba(0, 0, 0, .6);
+  box-shadow: inset 0 0 0 3px #fffaf0, inset 0 0 0 4px rgba(201, 162, 74, .5), 0 1rem 2rem -1.2rem rgba(107, 15, 26, .45);
   perspective: 600px;
   animation: unit-glow 3s ease-in-out infinite alternate;
 }
@@ -1203,9 +1280,9 @@ main, .site-footer { position: relative; z-index: 2; }
   position: absolute;
   left: 8%;
   right: 8%;
-  top: 50%;
+  top: 58%;
   height: 1px;
-  background: rgba(107, 15, 26, .15);
+  background: rgba(107, 15, 26, .12);
 }
 .cd-value {
   display: block;
@@ -1233,8 +1310,8 @@ main, .site-footer { position: relative; z-index: 2; }
   100% { transform: rotateX(0); opacity: 1; }
 }
 @keyframes unit-glow {
-  from { box-shadow: 0 0 0 4px rgba(243, 217, 139, .1), 0 1rem 2rem -1rem rgba(0, 0, 0, .6); }
-  to { box-shadow: 0 0 1.6rem 4px rgba(255, 182, 39, .35), 0 1rem 2rem -1rem rgba(0, 0, 0, .6); }
+  from { box-shadow: inset 0 0 0 3px #fffaf0, inset 0 0 0 4px rgba(201, 162, 74, .5), 0 1rem 2rem -1.2rem rgba(107, 15, 26, .45); }
+  to { box-shadow: inset 0 0 0 3px #fffaf0, inset 0 0 0 4px rgba(201, 162, 74, .5), 0 0 1.4rem .2rem rgba(243, 217, 139, .7), 0 1rem 2rem -1.2rem rgba(107, 15, 26, .45); }
 }
 .countdown-done {
   max-width: 34rem;
@@ -1245,11 +1322,15 @@ main, .site-footer { position: relative; z-index: 2; }
   margin: 0;
   font-size: clamp(2.6rem, 10vw, 4.6rem);
   line-height: 1.2;
+  color: var(--maroon);
 }
-.countdown-done p:last-child { margin: .4rem 0 0; color: rgba(247, 236, 214, .88); }
+.countdown-done p:last-child { margin: .4rem 0 0; color: var(--ink-soft); }
 
 /* Venue */
-.venue .mandala-bg { left: -15rem; top: -8rem; }
+.venue-chhatri { bottom: 0; width: clamp(8rem, 24vw, 24rem); }
+.venue-chhatri-left { left: clamp(-4rem, -4vw, 0rem); }
+.venue-chhatri-right { right: clamp(-4rem, -4vw, 0rem); }
+.venue-leaves { top: 0; right: 0; width: clamp(4.5rem, 14vw, 16rem); }
 .venue-grid {
   display: grid;
   gap: clamp(1.2rem, 3vw, 2rem);
@@ -1258,13 +1339,19 @@ main, .site-footer { position: relative; z-index: 2; }
 @media (min-width: 56em) {
   .venue-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); }
 }
-.venue-card {
+.venue-card, .rsvp-card {
+  --rise: clamp(2.4rem, 7vw, 3.6rem);
   position: relative;
-  padding: clamp(1.6rem, 5vw, 2.6rem);
-  border-radius: var(--radius);
+  border-radius: 50% 50% var(--radius) var(--radius) / var(--rise) var(--rise) var(--radius) var(--radius);
   background: #fffdf7;
-  border: 1px solid rgba(201, 162, 74, .55);
-  box-shadow: 0 1.4rem 3rem -2rem rgba(107, 15, 26, .45);
+  border: 1.5px solid var(--gold);
+  box-shadow:
+    inset 0 0 0 .35rem #fffdf7,
+    inset 0 0 0 .42rem rgba(201, 162, 74, .4),
+    0 1.4rem 3rem -2rem rgba(107, 15, 26, .45);
+}
+.venue-card {
+  padding: calc(var(--rise) + .6rem) clamp(1.6rem, 5vw, 2.6rem) clamp(1.6rem, 5vw, 2.6rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1277,7 +1364,8 @@ main, .site-footer { position: relative; z-index: 2; }
   margin-bottom: 1rem;
   border-radius: 50%;
   background: var(--maroon);
-  color: var(--marigold);
+  border: 1.5px solid var(--gold);
+  color: var(--gold-light);
   animation: bob 4s ease-in-out infinite;
 }
 .venue-pin svg { width: 1.6rem; height: 1.6rem; }
@@ -1328,15 +1416,16 @@ main, .site-footer { position: relative; z-index: 2; }
 .venue-actions { display: grid; }
 .venue-actions .btn { padding-inline: 1rem; white-space: nowrap; }
 .map-frame {
+  --rise: clamp(2.4rem, 7vw, 4rem);
   position: relative;
   min-height: clamp(18rem, 55vw, 30rem);
-  border-radius: var(--radius);
+  border-radius: 50% 50% var(--radius) var(--radius) / var(--rise) var(--rise) var(--radius) var(--radius);
   overflow: hidden;
-  border: 1px solid rgba(201, 162, 74, .55);
+  border: 2px solid var(--gold);
   background:
     repeating-linear-gradient(45deg, rgba(201, 162, 74, .08) 0 12px, transparent 12px 24px),
     var(--sand);
-  box-shadow: 0 1.4rem 3rem -2rem rgba(107, 15, 26, .45);
+  box-shadow: 0 0 0 .35rem rgba(255, 253, 247, .9), 0 0 0 .42rem rgba(201, 162, 74, .45), 0 1.4rem 3rem -2rem rgba(107, 15, 26, .45);
 }
 .map-frame iframe {
   position: absolute;
@@ -1359,11 +1448,31 @@ main, .site-footer { position: relative; z-index: 2; }
 .map-placeholder svg { width: 2.6rem; height: 2.6rem; animation: bob 3s ease-in-out infinite; }
 
 /* RSVP */
-.rsvp { background: var(--ivory); }
-.rsvp .mandala-bg { right: -15rem; bottom: -12rem; }
+.rsvp {
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(255, 252, 240, .9), transparent 60%),
+    var(--ivory);
+}
+.rsvp-pillar {
+  top: 0;
+  bottom: 0;
+  width: clamp(1.2rem, 3vw, 3rem);
+  opacity: .22;
+  background:
+    repeating-linear-gradient(180deg, transparent 0 2.4rem, rgba(122, 84, 24, .45) 2.4rem 2.5rem, rgba(255, 241, 184, .8) 2.5rem 2.6rem, transparent 2.6rem 3.2rem),
+    linear-gradient(90deg, #a8812f 0%, #f3d98b 32%, #d9b56a 58%, #a8812f 100%);
+}
+.rsvp-pillar-left { left: max(.4rem, var(--safe-l)); }
+.rsvp-pillar-right { right: max(.4rem, var(--safe-r)); }
+.rsvp-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(.6rem, 2vw, 1.2rem);
+}
 .rsvp-grid {
   display: grid;
-  gap: clamp(1.2rem, 3vw, 2rem);
+  gap: clamp(1.6rem, 3vw, 2rem);
   max-width: 52rem;
   margin: 0 auto;
 }
@@ -1371,25 +1480,16 @@ main, .site-footer { position: relative; z-index: 2; }
   .rsvp-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 .rsvp-card {
-  position: relative;
+  --sprig-w: clamp(1.8rem, 4.5vw, 2.8rem);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: clamp(1.6rem, 5vw, 2.4rem) clamp(1.2rem, 4vw, 2rem);
-  border-radius: var(--radius);
-  background: #fffdf7;
-  border: 1px solid rgba(201, 162, 74, .55);
-  box-shadow: 0 1.4rem 3rem -2rem rgba(107, 15, 26, .45);
+  padding: calc(var(--rise) + .2rem) clamp(1.2rem, 4vw, 2rem) clamp(1.6rem, 5vw, 2.4rem);
   text-align: center;
 }
-.rsvp-card::before {
-  content: "";
-  position: absolute;
-  inset: .45rem;
-  border: 1px solid rgba(201, 162, 74, .3);
-  border-radius: calc(var(--radius) - .3rem);
-  pointer-events: none;
-}
+.rsvp-sprig { top: calc(var(--rise) * .2); width: var(--sprig-w); }
+.rsvp-sprig-left { left: calc(var(--sprig-w) * -.5); }
+.rsvp-sprig-right { right: calc(var(--sprig-w) * -.5); }
 .rsvp-icon {
   display: grid;
   place-items: center;
@@ -1398,7 +1498,8 @@ main, .site-footer { position: relative; z-index: 2; }
   margin-bottom: 1rem;
   border-radius: 50%;
   background: var(--maroon);
-  color: var(--marigold);
+  border: 1.5px solid var(--gold);
+  color: var(--gold-light);
 }
 .rsvp-icon svg { width: 1.4rem; height: 1.4rem; }
 .rsvp-card h3 {
@@ -1426,32 +1527,42 @@ main, .site-footer { position: relative; z-index: 2; }
 
 /* Footer */
 .site-footer {
+  --pond-h: clamp(3.4rem, 9vw, 9rem);
+  --elephant-w: clamp(5rem, 22vw, 16rem);
   position: relative;
-  padding: clamp(6.5rem, 11vw, 9rem) 0 calc(6.5rem + var(--safe-b));
+  padding: clamp(4.5rem, 9vw, 7rem) 0 calc(var(--pond-h) * .3 + var(--elephant-w) * .83 + 1.4rem + var(--safe-b));
   text-align: center;
-  color: var(--cream);
+  color: var(--ink);
   background:
-    radial-gradient(ellipse at 50% 0%, rgba(232, 116, 30, .25), transparent 60%),
-    var(--maroon-deep);
+    radial-gradient(ellipse at 50% 30%, rgba(255, 252, 240, .9), transparent 60%),
+    linear-gradient(180deg, #f8efdc 0%, #efdfbd 70%, #e6cf9f 100%);
+  border-top: 1px solid rgba(201, 162, 74, .45);
   overflow: hidden;
 }
-.site-footer .toran { top: 0; }
-.footer-diya { width: 3.4rem; margin: 1.5rem auto .6rem; }
+.footer-diya { width: 3.4rem; margin: 0 auto .6rem; }
 .footer-thanks {
   margin: 1rem 0 0;
   font-size: clamp(2.2rem, 8vw, 3.4rem);
   line-height: 1.2;
+  color: var(--maroon);
 }
 .footer-closing {
   max-width: 34rem;
   margin: 2.6rem auto 0;
   padding-top: 2rem;
-  border-top: 1px solid rgba(243, 217, 139, .25);
+  border-top: 1px solid rgba(201, 162, 74, .45);
+}
+.footer-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(.6rem, 2vw, 1.2rem);
 }
 .footer-love {
   margin: 0;
   font-size: clamp(2.6rem, 10vw, 4rem);
   line-height: 1.2;
+  color: var(--maroon);
 }
 .closing-names {
   display: grid;
@@ -1461,14 +1572,23 @@ main, .site-footer { position: relative; z-index: 2; }
 }
 .closing-names li {
   padding: .55rem .8rem;
-  border-bottom: 1px solid rgba(243, 217, 139, .18);
+  border-bottom: 1px solid rgba(201, 162, 74, .3);
   font-family: var(--font-display);
   font-size: clamp(1.15rem, 3.6vw, 1.4rem);
   font-weight: 600;
-  color: var(--cream);
+  color: var(--maroon-deep);
   text-wrap: balance;
 }
 .closing-names li:last-child { border-bottom: 0; }
+.footer-elephant { bottom: calc(var(--pond-h) * .25 + var(--safe-b)); width: var(--elephant-w); }
+.footer-elephant-left { left: max(.4rem, var(--safe-l)); }
+.footer-elephant-right { right: max(.4rem, var(--safe-r)); }
+.footer-pond { height: calc(var(--pond-h) + var(--safe-b)); }
+@media (min-width: 60em) {
+  .site-footer { padding-bottom: calc(var(--pond-h) * .8 + 1.4rem + var(--safe-b)); }
+  .footer-elephant-left { left: max(1rem, calc(50% - 19rem - var(--elephant-w))); }
+  .footer-elephant-right { right: max(1rem, calc(50% - 19rem - var(--elephant-w))); }
+}
 
 /* Floating buttons */
 .fab-group {
@@ -1491,15 +1611,15 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
   width: 3.3rem;
   height: 3.3rem;
   padding: 0;
-  border: 1.5px solid var(--gold-light);
+  border: 1.5px solid var(--gold);
   border-radius: 50%;
-  background: var(--maroon);
+  background: linear-gradient(135deg, #5c0d17 0%, #8a1c2b 50%, #6b0f1a 100%);
   color: var(--gold-light);
-  box-shadow: 0 .8rem 1.6rem -.6rem rgba(0, 0, 0, .55);
+  box-shadow: 0 .8rem 1.6rem -.6rem rgba(107, 15, 26, .6), inset 0 0 0 3px rgba(107, 15, 26, .9), inset 0 0 0 4px rgba(243, 217, 139, .45);
   overflow: hidden;
-  transition: transform .35s var(--ease-out), background-color .3s;
+  transition: transform .35s var(--ease-out), filter .3s;
 }
-.fab:hover, .fab:focus-visible { transform: scale(1.08); background: var(--maroon-soft); }
+.fab:hover, .fab:focus-visible { transform: scale(1.08); filter: brightness(1.15); }
 .fab svg { width: 1.35rem; height: 1.35rem; }
 .fab::after {
   content: "";
@@ -1511,7 +1631,7 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
 .fab:hover::after { animation: fab-sweep .9s var(--ease-out); }
 @keyframes fab-sweep { to { transform: translateX(120%); } }
 .music-bars { display: none; gap: 3px; align-items: flex-end; height: 1.2rem; }
-.music-bars i { width: 3px; height: 30%; border-radius: 2px; background: var(--marigold); animation: bars 1s ease-in-out infinite alternate; }
+.music-bars i { width: 3px; height: 30%; border-radius: 2px; background: var(--gold-light); animation: bars 1s ease-in-out infinite alternate; }
 .music-bars i:nth-child(2) { animation-delay: -.3s; }
 .music-bars i:nth-child(3) { animation-delay: -.6s; }
 .music-bars i:nth-child(4) { animation-delay: -.15s; }
@@ -1523,7 +1643,7 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
   position: absolute;
   inset: -2px;
   border-radius: 50%;
-  border: 2px solid var(--marigold);
+  border: 2px solid var(--gold);
   animation: ring-pulse 2s ease-out infinite;
 }
 @keyframes ring-pulse {
@@ -1678,6 +1798,7 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
     <div class="intro-leaves intro-leaves-left" data-svg="bananaLeaves"></div>
     <div class="intro-leaves intro-leaves-right" data-svg="bananaLeaves"></div>
   </div>
+  <canvas class="leaf-fall" id="leafFall" aria-hidden="true"></canvas>
   <div class="intro-bloom" aria-hidden="true"></div>
   <div class="intro-content">
     <div class="intro-card">
@@ -1715,70 +1836,99 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
 <main id="main">
 
   <section class="hero" id="home" aria-labelledby="heroTitle">
-    <div class="toran" data-toran data-parallax="-30" aria-hidden="true"></div>
-    <div class="mandala-bg hero-mandala" data-svg="mandala" aria-hidden="true"></div>
-    <canvas class="petals" id="petals" aria-hidden="true"></canvas>
-    <div class="hero-diya hero-diya-1" data-parallax="-60" aria-hidden="true"><div data-svg="diya"></div></div>
-    <div class="hero-diya hero-diya-2" data-parallax="-80" aria-hidden="true"><div data-svg="diya"></div></div>
-    <div class="hero-diya hero-diya-3" data-parallax="-140" aria-hidden="true"><div data-svg="diya"></div></div>
-    <div class="hero-diya hero-diya-4" data-parallax="-110" aria-hidden="true"><div data-svg="diya"></div></div>
+    <div class="prop prop-leaves hero-leaves hero-leaves-left" data-svg="bananaLeaves" data-parallax="-40" aria-hidden="true"></div>
+    <div class="prop prop-leaves prop-flip hero-leaves hero-leaves-right" data-svg="bananaLeaves" data-parallax="-40" aria-hidden="true"></div>
+    <div class="prop prop-chhatri hero-chhatri hero-chhatri-left" data-svg="chhatri" data-parallax="-25" aria-hidden="true"></div>
+    <div class="prop prop-chhatri prop-flip hero-chhatri hero-chhatri-right" data-svg="chhatri" data-parallax="-25" aria-hidden="true"></div>
 
-    <div class="hero-content container">
-      <p class="hero-shri" lang="hi" data-reveal="fade-down">॥ श्री गणेशाय नमः ॥</p>
-      <p class="hero-eyebrow" data-reveal="fade-up" style="--delay:.15s">With the blessings of the Almighty</p>
-      <h1 class="hero-title" id="heroTitle" data-reveal="scale" style="--delay:.3s" data-bind="event.title"></h1>
-      <p class="hero-hindi" lang="hi" data-reveal="fade-up" style="--delay:.45s">गृह प्रवेश</p>
-      <span data-reveal="scale" style="--delay:.55s" data-svg="divider"></span>
-      <p class="hero-label" data-reveal="fade-up" style="--delay:.65s">of our new home</p>
-      <p class="hero-date" data-reveal="fade-up" style="--delay:.8s">
-        <time id="heroDate" data-event-date></time>
-      </p>
-      <p class="hero-tagline" data-reveal="fade-up" style="--delay:1.05s" data-bind="event.tagline"></p>
-      <div class="hero-actions" data-reveal="fade-up" style="--delay:1.2s">
-        <a class="btn btn-gold" href="#blessings">View invitation</a>
-        <a class="btn btn-outline" href="#venue">View venue</a>
+    <div class="hero-arch">
+      <div class="hero-arch-glow" aria-hidden="true"></div>
+      <div class="arch-strings" aria-hidden="true">
+        <span class="arch-string" style="--len:.95" data-svg="hangingBud"></span>
+        <span class="arch-string" style="--len:.62" data-svg="hangingBud"></span>
+        <span class="arch-string" style="--len:.5" data-svg="hangingBud"></span>
+        <span class="arch-string" style="--len:.4" data-svg="hangingBud"></span>
+        <span class="arch-string" style="--len:.5" data-svg="hangingBud"></span>
+        <span class="arch-string" style="--len:.62" data-svg="hangingBud"></span>
+        <span class="arch-string" style="--len:.95" data-svg="hangingBud"></span>
+      </div>
+      <div class="arch-crown" data-svg="archCrown" aria-hidden="true"></div>
+      <div class="arch-pillar arch-pillar-left" aria-hidden="true"></div>
+      <div class="arch-pillar arch-pillar-right" aria-hidden="true"></div>
+
+      <div class="hero-content">
+        <p class="hero-shri" lang="hi" data-reveal="fade-down">॥ श्री गणेशाय नमः ॥</p>
+        <p class="hero-eyebrow" data-reveal="fade-up" style="--delay:.15s">With the blessings of the Almighty</p>
+        <h1 class="hero-title" id="heroTitle" data-reveal="scale" style="--delay:.3s" data-bind="event.title"></h1>
+        <div class="hero-heading" data-reveal="fade-up" style="--delay:.45s">
+          <span class="bird" data-svg="bird" aria-hidden="true"></span>
+          <p class="hero-hindi" lang="hi">गृह प्रवेश</p>
+          <span class="bird bird-flip" data-svg="bird" aria-hidden="true"></span>
+        </div>
+        <span data-reveal="scale" style="--delay:.55s" data-svg="lotusDivider"></span>
+        <p class="hero-label" data-reveal="fade-up" style="--delay:.65s">of our new home</p>
+        <p class="hero-date" data-reveal="fade-up" style="--delay:.8s">
+          <time id="heroDate" data-event-date></time>
+        </p>
+        <p class="hero-tagline" data-reveal="fade-up" style="--delay:1.05s" data-bind="event.tagline"></p>
+        <div class="hero-actions" data-reveal="fade-up" style="--delay:1.2s">
+          <a class="btn btn-maroon" href="#blessings">View invitation</a>
+          <a class="btn btn-outline" href="#venue">View venue</a>
+        </div>
       </div>
     </div>
 
+    <div class="prop prop-elephant hero-elephant hero-elephant-left" data-svg="elephant" aria-hidden="true"></div>
+    <div class="prop prop-elephant prop-flip hero-elephant hero-elephant-right" data-svg="elephant" aria-hidden="true"></div>
+    <div class="prop prop-pond hero-pond" data-svg="lotusPond" aria-hidden="true"></div>
     <a class="scroll-cue" href="#blessings" aria-label="Scroll to the invitation"><span></span>Scroll</a>
   </section>
 
   <section class="section blessings" id="blessings" aria-labelledby="blessingsTitle">
-    <div class="mandala-bg" data-svg="mandala" aria-hidden="true"></div>
     <div class="container">
       <div class="section-head">
         <p class="section-kicker" data-reveal="fade-up">Aapka swagat hai</p>
         <h2 class="section-title gold-foil-dark" id="blessingsTitle" data-reveal="fade-up" style="--delay:.1s">With Blessings &amp; Love</h2>
-        <span data-reveal="scale" style="--delay:.2s" data-svg="divider"></span>
+        <span data-reveal="scale" style="--delay:.2s" data-svg="lotusDivider"></span>
       </div>
 
       <article class="blessing-card" data-reveal="scale">
-        <span class="rangoli rangoli-tl" data-svg="rangoli" aria-hidden="true"></span>
-        <span class="rangoli rangoli-tr" data-svg="rangoli" aria-hidden="true"></span>
-        <span class="rangoli rangoli-bl" data-svg="rangoli" aria-hidden="true"></span>
-        <span class="rangoli rangoli-br" data-svg="rangoli" aria-hidden="true"></span>
-        <span class="sparkle" style="top:12%;left:22%" aria-hidden="true"></span>
-        <span class="sparkle" style="top:30%;right:14%;animation-delay:-1.1s" aria-hidden="true"></span>
-        <span class="sparkle" style="bottom:22%;left:12%;animation-delay:-2.2s" aria-hidden="true"></span>
-        <span class="sparkle" style="bottom:10%;right:26%;animation-delay:-.6s" aria-hidden="true"></span>
+        <span class="blessing-crest" data-svg="lotus" aria-hidden="true"></span>
+        <span class="prop prop-sprig blessing-sprig blessing-sprig-left" data-svg="sprig" aria-hidden="true"></span>
+        <span class="prop prop-sprig prop-flip blessing-sprig blessing-sprig-right" data-svg="sprig" aria-hidden="true"></span>
+        <span class="filigree filigree-left" data-svg="filigree" aria-hidden="true"></span>
+        <span class="filigree filigree-right" data-svg="filigree" aria-hidden="true"></span>
+        <span class="sparkle" style="top:2.6rem;left:28%" aria-hidden="true"></span>
+        <span class="sparkle" style="top:3.6rem;right:26%;animation-delay:-1.1s" aria-hidden="true"></span>
+        <span class="sparkle" style="bottom:1.2rem;left:34%;animation-delay:-2.2s" aria-hidden="true"></span>
+        <span class="sparkle" style="bottom:1.6rem;right:38%;animation-delay:-.6s" aria-hidden="true"></span>
 
         <div class="kalash" data-svg="kalash" data-reveal="fade-up" aria-hidden="true"></div>
         <p class="shlok" lang="sa" id="shlok" data-reveal="fade-up" style="--delay:.1s"></p>
         <p class="shlok-source" data-reveal="fade-up" style="--delay:.2s" data-bind="blessings.shlokSource"></p>
         <p class="shlok-meaning" data-reveal="fade-up" style="--delay:.3s" data-bind="blessings.shlokMeaning"></p>
-        <span data-reveal="scale" style="--delay:.35s" data-svg="divider"></span>
+        <span data-reveal="scale" style="--delay:.35s" data-svg="lotusDivider"></span>
         <div class="blessing-message" id="blessingMessage" lang="hi"></div>
       </article>
     </div>
   </section>
 
-  <section class="section section-dark countdown" id="countdown" aria-labelledby="countdownTitle">
-    <div class="mandala-bg" data-svg="mandala" aria-hidden="true"></div>
+  <section class="section section-cream countdown" id="countdown" aria-labelledby="countdownTitle">
     <div class="container">
       <div class="section-head">
         <p class="section-kicker" data-reveal="fade-up">Shubh din</p>
-        <h2 class="section-title gold-foil" id="countdownTitle" data-reveal="fade-up" style="--delay:.1s">Counting Down to Our Griha Pravesh</h2>
+        <h2 class="section-title gold-foil-dark" id="countdownTitle" data-reveal="fade-up" style="--delay:.1s">Counting Down to Our Griha Pravesh</h2>
         <p class="section-sub" data-reveal="fade-up" style="--delay:.2s" data-event-date></p>
+        <span data-reveal="scale" style="--delay:.25s" data-svg="lotusDivider"></span>
+      </div>
+      <div class="countdown-strings" aria-hidden="true">
+        <span class="arch-string" style="--len:.55" data-svg="hangingBud"></span>
+        <span class="arch-string" style="--len:.85" data-svg="hangingBud"></span>
+        <span class="arch-string" style="--len:.65" data-svg="hangingBud"></span>
+        <span class="arch-string" style="--len:.95" data-svg="hangingBud"></span>
+        <span class="arch-string" style="--len:.65" data-svg="hangingBud"></span>
+        <span class="arch-string" style="--len:.85" data-svg="hangingBud"></span>
+        <span class="arch-string" style="--len:.55" data-svg="hangingBud"></span>
       </div>
       <div class="countdown-grid" id="countdownGrid" role="timer" aria-live="off" data-reveal="fade-up" style="--delay:.25s">
         <div class="cd-unit"><span class="cd-value" data-unit="days">00</span><span class="cd-label">Days</span></div>
@@ -1787,19 +1937,21 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
         <div class="cd-unit"><span class="cd-value" data-unit="seconds">00</span><span class="cd-label">Seconds</span></div>
       </div>
       <div class="countdown-done" id="countdownDone" hidden>
-        <p class="script gold-foil" id="countdownDoneTitle"></p>
+        <p class="script" id="countdownDoneTitle"></p>
         <p id="countdownDoneText"></p>
       </div>
     </div>
   </section>
 
   <section class="section section-cream venue" id="venue" aria-labelledby="venueTitle">
-    <div class="mandala-bg" data-svg="mandala" aria-hidden="true"></div>
+    <div class="prop prop-chhatri prop-ghost venue-chhatri venue-chhatri-left" data-svg="chhatri" aria-hidden="true"></div>
+    <div class="prop prop-chhatri prop-ghost prop-flip venue-chhatri venue-chhatri-right" data-svg="chhatri" aria-hidden="true"></div>
+    <div class="prop prop-leaves prop-flip venue-leaves" data-svg="bananaLeaves" aria-hidden="true"></div>
     <div class="container">
       <div class="section-head">
         <p class="section-kicker" data-reveal="fade-up">Sthal</p>
         <h2 class="section-title gold-foil-dark" id="venueTitle" data-reveal="fade-up" style="--delay:.1s">Our New Address</h2>
-        <span data-reveal="scale" style="--delay:.2s" data-svg="divider"></span>
+        <span data-reveal="scale" style="--delay:.2s" data-svg="lotusDivider"></span>
       </div>
       <div class="venue-grid">
         <article class="venue-card" data-reveal="slide-right">
@@ -1810,7 +1962,7 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
             <div><dt>Date &amp; Time</dt><dd data-event-date></dd></div>
           </dl>
           <div class="venue-actions">
-            <a class="btn btn-gold" id="directionsLink" href="#" target="_blank" rel="noopener"><span data-icon="pin"></span>Get Directions</a>          </div>
+            <a class="btn btn-maroon" id="directionsLink" href="#" target="_blank" rel="noopener"><span data-icon="pin"></span>Get Directions</a>          </div>
         </article>
         <div class="map-frame" id="mapFrame" data-reveal="slide-left">
           <div class="map-placeholder">
@@ -1823,13 +1975,18 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
   </section>
 
   <section class="section rsvp" id="rsvp" aria-labelledby="rsvpTitle">
-    <div class="mandala-bg" data-svg="mandala" aria-hidden="true"></div>
+    <div class="prop rsvp-pillar rsvp-pillar-left" aria-hidden="true"></div>
+    <div class="prop rsvp-pillar rsvp-pillar-right" aria-hidden="true"></div>
     <div class="container">
       <div class="section-head">
         <p class="section-kicker" data-reveal="fade-up">Sampark</p>
-        <h2 class="section-title gold-foil-dark" id="rsvpTitle" data-reveal="fade-up" style="--delay:.1s">RSVP</h2>
+        <div class="rsvp-heading" data-reveal="fade-up" style="--delay:.1s">
+          <span class="bird" data-svg="bird" aria-hidden="true"></span>
+          <h2 class="section-title gold-foil-dark" id="rsvpTitle">RSVP</h2>
+          <span class="bird bird-flip" data-svg="bird" aria-hidden="true"></span>
+        </div>
         <p class="section-sub" data-reveal="fade-up" style="--delay:.2s" data-bind="rsvp.note"></p>
-        <span data-reveal="scale" style="--delay:.25s" data-svg="divider"></span>
+        <span data-reveal="scale" style="--delay:.25s" data-svg="lotusDivider"></span>
       </div>
       <div class="rsvp-grid" id="rsvpContacts"></div>
     </div>
@@ -1838,15 +1995,21 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
 </main>
 
 <footer class="site-footer" id="footer">
-  <div class="toran" data-toran aria-hidden="true"></div>
   <div class="container">
     <div class="footer-diya" data-svg="diya" aria-hidden="true"></div>
-    <p class="footer-thanks script gold-foil" data-reveal="fade-up" data-bind="footer.thankYou"></p>
+    <p class="footer-thanks script" data-reveal="fade-up" data-bind="footer.thankYou"></p>
     <div class="footer-closing">
-      <p class="footer-love script gold-foil" data-reveal="fade-up" data-bind="footer.signOff"></p>
+      <div class="footer-heading" data-reveal="fade-up">
+        <span class="bird" data-svg="bird" aria-hidden="true"></span>
+        <p class="footer-love script" data-bind="footer.signOff"></p>
+        <span class="bird bird-flip" data-svg="bird" aria-hidden="true"></span>
+      </div>
       <ul class="closing-names" id="closingNames"></ul>
     </div>
   </div>
+  <div class="prop prop-elephant footer-elephant footer-elephant-left" data-svg="elephant" aria-hidden="true"></div>
+  <div class="prop prop-elephant prop-flip footer-elephant footer-elephant-right" data-svg="elephant" aria-hidden="true"></div>
+  <div class="prop prop-pond footer-pond" data-svg="lotusPond" aria-hidden="true"></div>
 </footer>
 
 <div class="fab-group">
@@ -1986,11 +2149,6 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
     whatsapp: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5 4.8 16A8.6 8.6 0 1 1 8 19.3z"/><path d="M9.2 8.6c0 3.3 2.9 6.2 6.2 6.2l.9-1.6-2-.9-.9.8a4.5 4.5 0 0 1-2.5-2.5l.8-.9-.9-2z"/></svg>'
   };
 
-  const marigold = (cy, outer, inner) =>
-    `<circle cx="22" cy="${cy}" r="8.4" fill="${outer}"/>` +
-    `<circle cx="22" cy="${cy}" r="8.4" fill="none" stroke="#c7581a" stroke-width="1.6" stroke-dasharray="2 2.3"/>` +
-    `<circle cx="22" cy="${cy}" r="4.6" fill="${inner}"/>`;
-
   const SVG = {
     diya: () => `<svg class="diya-svg" viewBox="0 0 80 80" aria-hidden="true" focusable="false">
       <ellipse class="diya-glow" cx="40" cy="30" rx="26" ry="26" fill="url(#gGlow)"/>
@@ -2000,23 +2158,6 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
       <path d="M8 44c9 4 19 6 32 6s23-2 32-6" fill="none" stroke="#f3d98b" stroke-width="2.4"/>
       <path d="M22 56c5 3 11 4 18 4s13-1 18-4" fill="none" stroke="#f3d98b" stroke-width="1.2" stroke-dasharray="1.5 3" opacity=".8"/>
       <path d="M36 39h8" stroke="#4a1d08" stroke-width="2" stroke-linecap="round"/>
-    </svg>`,
-
-    leafUnit: () => `<svg viewBox="0 0 44 100" preserveAspectRatio="xMidYMin meet" aria-hidden="true" focusable="false">
-      <path d="M22 0v10" stroke="#c9a24a" stroke-width="1.4"/>
-      <path d="M22 10c13 18 14 52 0 82-14-30-13-64 0-82z" fill="url(#gLeaf)"/>
-      <path d="M22 12v78" stroke="#b9e08a" stroke-width="1.1" opacity=".85"/>
-      <path d="M22 30l7-5M22 44l8-5M22 58l7-5M22 30l-7-5M22 44l-8-5M22 58l-7-5" stroke="#b9e08a" stroke-width=".8" opacity=".6"/>
-    </svg>`,
-
-    marigoldUnit: () => `<svg viewBox="0 0 44 100" preserveAspectRatio="xMidYMin meet" aria-hidden="true" focusable="false">
-      <path d="M22 0v78" stroke="#c9a24a" stroke-width="1.2"/>
-      ${marigold(13, "#ff9f1c", "#ffd166")}
-      ${marigold(30, "#ffc23c", "#ff9f1c")}
-      ${marigold(47, "#ff9f1c", "#ffd166")}
-      ${marigold(64, "#ffc23c", "#ff9f1c")}
-      <path d="M17 76h10l-1.6 8h-6.8z" fill="url(#gGold)"/>
-      <circle cx="22" cy="88" r="2.4" fill="#c9a24a"/>
     </svg>`,
 
     kalash: () => {
@@ -2038,37 +2179,6 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
         <g fill="#b3121f"><circle cx="91" cy="166" r="2.6"/><circle cx="109" cy="166" r="2.6"/><circle cx="91" cy="184" r="2.6"/><circle cx="109" cy="184" r="2.6"/></g>
         <path d="M58 160c2-14 9-24 20-31" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".3"/>
         <ellipse cx="100" cy="224" rx="46" ry="9" fill="url(#gGold)"/>
-      </svg>`;
-    },
-
-    rangoli: () => {
-      const petals = Array.from({ length: 7 }, (_, index) => {
-        const angle = (index / 6) * 90;
-        const fill = index % 2 ? "#e8741e" : "#6b0f1a";
-        return `<g transform="rotate(${angle})"><path d="M20 0c14-7 34-7 50 0-16 7-36 7-50 0z" fill="${fill}" opacity=".88"/><circle cx="80" cy="0" r="3.2" fill="#c9a24a"/><circle cx="96" cy="0" r="2" fill="#e8741e"/></g>`;
-      }).join("");
-      return `<svg viewBox="0 0 120 120" aria-hidden="true" focusable="false">
-        <path d="M108 0A108 108 0 0 1 0 108" fill="none" stroke="#c9a24a" stroke-width="1.4" stroke-dasharray="2 5"/>
-        <path d="M74 0A74 74 0 0 1 0 74" fill="none" stroke="#c9a24a" stroke-width="1.2"/>
-        ${petals}
-        <circle r="18" fill="#ffb627"/>
-        <circle r="11" fill="#b3121f"/>
-      </svg>`;
-    },
-
-    mandala: () => {
-      const ring = (count, radius, length, width, color, opacity) =>
-        Array.from({ length: count }, (_, index) =>
-          `<path transform="rotate(${(360 / count) * index})" d="M0 ${-radius}C${width} ${-radius - length * 0.35} ${width} ${-radius - length * 0.8} 0 ${-radius - length}C${-width} ${-radius - length * 0.8} ${-width} ${-radius - length * 0.35} 0 ${-radius}Z" fill="${color}" opacity="${opacity}"/>`
-        ).join("");
-      return `<svg viewBox="-200 -200 400 400" aria-hidden="true" focusable="false">
-        ${ring(12, 28, 52, 15, "#c9a24a", 0.75)}
-        ${ring(24, 86, 56, 11, "#e8741e", 0.55)}
-        ${ring(36, 148, 44, 7, "#6b0f1a", 0.45)}
-        <circle r="24" fill="none" stroke="#c9a24a" stroke-width="2"/>
-        <circle r="82" fill="none" stroke="#c9a24a" stroke-width="1.5"/>
-        <circle r="144" fill="none" stroke="#c9a24a" stroke-width="1.5" stroke-dasharray="2 6"/>
-        <circle r="196" fill="none" stroke="#c9a24a" stroke-width="1.2"/>
       </svg>`;
     },
 
@@ -2310,6 +2420,27 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
       </svg>`;
     },
 
+    lotus: () => `<svg viewBox="-42 -70 84 76" aria-hidden="true" focusable="false"><use href="#lotusBloom"/></svg>`,
+
+    filigree: () => `<svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+      <path d="M8 92V34M8 92H66" fill="none" stroke="#c9a24a" stroke-width="1.6"/>
+      <path d="M8 34C8 20 22 16 27 25 30 31 24 36 19 32" fill="none" stroke="#b8862f" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M66 92C80 92 84 78 75 73 69 70 64 76 68 81" fill="none" stroke="#b8862f" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M14 86C24 66 40 56 58 54" fill="none" stroke="#c9a24a" stroke-width="1.1" opacity=".8"/>
+      <path d="M30 66c2-9 10-13 17-11-3 7-10 11-17 11zM20 76c-6-6-6-15-1-20 4 6 4 14 1 20z" fill="#d9b56a"/>
+      <g fill="#c9a24a"><circle cx="8" cy="92" r="3"/><circle cx="8" cy="60" r="1.6"/><circle cx="38" cy="92" r="1.6"/></g>
+      <g transform="translate(20 80) rotate(45) scale(.34)"><use href="#lotusBloom"/></g>
+    </svg>`,
+
+    lotusDivider: () => `<svg class="divider" viewBox="0 0 240 36" aria-hidden="true" focusable="false">
+      <path d="M6 28H86M154 28H234" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M86 28c8 0 10-8 4-10s-8 6-2 6M154 28c-8 0-10-8-4-10s8 6 2 6" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      <g fill="#c9a24a"><circle cx="6" cy="28" r="2"/><circle cx="234" cy="28" r="2"/><circle cx="46" cy="28" r="1.6"/><circle cx="194" cy="28" r="1.6"/></g>
+      <g transform="translate(101 31) rotate(-40) scale(.3)"><use href="#lotusBud"/></g>
+      <g transform="translate(139 31) rotate(40) scale(.3)"><use href="#lotusBud"/></g>
+      <g transform="translate(120 32) scale(.44)"><use href="#lotusBloom"/></g>
+    </svg>`,
+
     divider: () => `<svg class="divider" viewBox="0 0 240 24" aria-hidden="true" focusable="false">
       <path d="M0 12h88" stroke="currentColor" stroke-width="1.2"/>
       <path d="M152 12h88" stroke="currentColor" stroke-width="1.2"/>
@@ -2329,10 +2460,11 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
       const value = getPath(CONFIG, element.dataset.bind);
       if (value != null) element.textContent = value;
     });
+    const inlineSvgs = ["divider", "lotusDivider"];
     $$("[data-svg]").forEach((element) => {
       const render = SVG[element.dataset.svg];
       if (!render) return;
-      if (element.dataset.svg !== "divider") {
+      if (!inlineSvgs.includes(element.dataset.svg)) {
         element.innerHTML = render();
         return;
       }
@@ -2353,25 +2485,6 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
       element.textContent = formatEventDate();
     });
     $("#heroDate").setAttribute("datetime", `${CONFIG.event.date}T${CONFIG.event.time}`);
-  }
-
-  function buildTorans() {
-    const torans = $$("[data-toran]");
-    const render = (toran) => {
-      if (!toran.firstElementChild) toran.innerHTML = `<span class="toran-unit">${SVG.leafUnit()}</span>`;
-      const unitWidth = toran.firstElementChild.getBoundingClientRect().width || 44;
-      const count = Math.ceil(toran.clientWidth / unitWidth) + 1;
-      if (toran.childElementCount === count) return;
-      toran.innerHTML = Array.from({ length: count }, (_, index) =>
-        `<span class="toran-unit" style="--i:${index}">${index % 2 ? SVG.marigoldUnit() : SVG.leafUnit()}</span>`
-      ).join("");
-    };
-    torans.forEach(render);
-    let resizeTimer;
-    window.addEventListener("resize", () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => torans.forEach(render), 200);
-    });
   }
 
   function renderBlessingMessage() {
@@ -2399,11 +2512,13 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
       .map((contact, index) => {
         const name = escapeHtml(contact.name);
         return `<article class="rsvp-card" data-reveal="fade-up" style="--delay:${(index * 0.12).toFixed(2)}s">
+          <span class="prop prop-sprig rsvp-sprig rsvp-sprig-left" aria-hidden="true">${SVG.sprig()}</span>
+          <span class="prop prop-sprig prop-flip rsvp-sprig rsvp-sprig-right" aria-hidden="true">${SVG.sprig()}</span>
           <span class="rsvp-icon" aria-hidden="true">${ICONS.phone}</span>
           <h3>${name}</h3>
           <p class="rsvp-phone">${escapeHtml(contact.displayPhone)}</p>
           <div class="rsvp-actions">
-            <a class="btn btn-gold" href="tel:+${contact.phone}" aria-label="Call ${name}">${ICONS.phone}Call</a>
+            <a class="btn btn-maroon" href="tel:+${contact.phone}" aria-label="Call ${name}">${ICONS.phone}Call</a>
             <a class="btn btn-outline" href="https://wa.me/${contact.phone}" target="_blank" rel="noopener" aria-label="WhatsApp ${name}">${ICONS.whatsapp}WhatsApp</a>
           </div>
         </article>`;
@@ -2669,83 +2784,126 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
     });
   }
 
-  function startPetals() {
-    const canvas = $("#petals");
+  function startLeafFall() {
+    const canvas = $("#leafFall");
     if (reduceMotion() || !canvas.getContext) {
       canvas.remove();
       return;
     }
     const context = canvas.getContext("2d");
-    const colors = ["#ff9f1c", "#ffb627", "#e8741e", "#ffd166", "#c7581a", "#b3121f"];
+    const kinds = [
+      { shape: "banana", fill: "#5b9a45", vein: "#c8e6a0", weight: 0.32 },
+      { shape: "mango", fill: "#3f7a34", vein: "#9fd07a", weight: 0.28 },
+      { shape: "mango", fill: "#d9b56a", vein: "#fff1b8", weight: 0.14 },
+      { shape: "petal", fill: "#f2a7bd", vein: "#ffd6e2", weight: 0.26 }
+    ];
+    const outlines = {
+      banana: (size) => {
+        const length = size * 1.5;
+        const width = size * 0.42;
+        context.moveTo(-length, 0);
+        context.bezierCurveTo(-length * 0.4, -width * 1.6, length * 0.4, -width * 1.6, length, 0);
+        context.bezierCurveTo(length * 0.4, width * 1.2, -length * 0.4, width * 1.2, -length, 0);
+      },
+      mango: (size) => {
+        const width = size * 0.45;
+        context.moveTo(-size, 0);
+        context.quadraticCurveTo(-size * 0.1, -width * 1.5, size, 0);
+        context.quadraticCurveTo(-size * 0.1, width * 1.5, -size, 0);
+      },
+      petal: (size) => {
+        const length = size * 0.85;
+        const width = size * 0.5;
+        context.moveTo(-length, 0);
+        context.bezierCurveTo(-length * 0.3, -width * 1.3, length * 0.6, -width * 0.9, length, 0);
+        context.bezierCurveTo(length * 0.6, width * 0.9, -length * 0.3, width * 1.3, -length, 0);
+      }
+    };
     let width = 0;
     let height = 0;
-    let petals = [];
+    let leaves = [];
     let frame = null;
-    let visible = true;
+    let last = 0;
 
-    const makePetal = (initial) => ({
+    const pickKind = () => {
+      let roll = Math.random();
+      return kinds.find((kind) => (roll -= kind.weight) < 0) || kinds[0];
+    };
+
+    const makeLeaf = (initial) => ({
+      kind: pickKind(),
       x: Math.random() * width,
-      y: initial ? Math.random() * height : -20 - Math.random() * 60,
-      size: 4 + Math.random() * 6,
-      speedY: 0.45 + Math.random() * 0.9,
-      speedX: -0.25 + Math.random() * 0.5,
-      rotation: Math.random() * Math.PI * 2,
-      spin: (Math.random() - 0.5) * 0.05,
+      y: initial ? Math.random() * height : -30 - Math.random() * 80,
+      size: 7 + Math.random() * 7,
+      fall: 0.45 + Math.random() * 0.6,
+      drift: -0.2 + Math.random() * 0.4,
+      sway: 0.4 + Math.random() * 0.8,
       phase: Math.random() * Math.PI * 2,
-      color: colors[Math.floor(Math.random() * colors.length)]
+      rotation: Math.random() * Math.PI * 2,
+      spin: (Math.random() - 0.5) * 0.03,
+      tumble: Math.random() * Math.PI * 2,
+      tumbleSpeed: 0.02 + Math.random() * 0.03
     });
 
     const resize = () => {
-      const rect = canvas.getBoundingClientRect();
       const ratio = Math.min(window.devicePixelRatio || 1, 2);
-      width = rect.width;
-      height = rect.height;
+      width = window.innerWidth;
+      height = window.innerHeight;
       canvas.width = Math.round(width * ratio);
       canvas.height = Math.round(height * ratio);
       context.setTransform(ratio, 0, 0, ratio, 0, 0);
-      const target = Math.round(Math.min(46, Math.max(14, width / 34)));
-      while (petals.length < target) petals.push(makePetal(true));
-      petals.length = target;
+      const target = width < 600 ? 12 : Math.min(30, Math.round(width / 60));
+      while (leaves.length < target) leaves.push(makeLeaf(true));
+      leaves.length = target;
     };
 
-    const draw = () => {
+    const drawLeaf = (leaf) => {
+      const turn = Math.cos(leaf.tumble);
+      context.save();
+      context.translate(leaf.x, leaf.y);
+      context.rotate(leaf.rotation);
+      context.scale(1, 0.25 + Math.abs(turn) * 0.75);
+      context.globalAlpha = turn < 0 ? 0.68 : 0.85;
+      context.fillStyle = leaf.kind.fill;
+      context.beginPath();
+      outlines[leaf.kind.shape](leaf.size);
+      context.fill();
+      context.globalAlpha *= 0.7;
+      context.strokeStyle = leaf.kind.vein;
+      context.lineWidth = 0.8;
+      context.beginPath();
+      context.moveTo(-leaf.size * 0.8, 0);
+      context.lineTo(leaf.size * 0.8, 0);
+      context.stroke();
+      context.restore();
+    };
+
+    const draw = (time) => {
+      const step = last ? Math.min((time - last) / 16.7, 3) : 1;
+      last = time;
       context.clearRect(0, 0, width, height);
-      petals.forEach((petal, index) => {
-        petal.phase += 0.018;
-        petal.y += petal.speedY;
-        petal.x += petal.speedX + Math.sin(petal.phase) * 0.55;
-        petal.rotation += petal.spin;
-        if (petal.y > height + 24 || petal.x < -30 || petal.x > width + 30) petals[index] = makePetal(false);
-        const flutter = 0.45 + Math.abs(Math.sin(petal.phase * 1.6)) * 0.55;
-        context.save();
-        context.translate(petal.x, petal.y);
-        context.rotate(petal.rotation);
-        context.scale(1, flutter);
-        context.globalAlpha = 0.88;
-        context.fillStyle = petal.color;
-        context.beginPath();
-        context.moveTo(-petal.size, 0);
-        context.quadraticCurveTo(0, -petal.size * 0.9, petal.size, 0);
-        context.quadraticCurveTo(0, petal.size * 0.9, -petal.size, 0);
-        context.fill();
-        context.globalAlpha = 0.3;
-        context.strokeStyle = "#6b2a0a";
-        context.lineWidth = 0.6;
-        context.beginPath();
-        context.moveTo(-petal.size * 0.8, 0);
-        context.lineTo(petal.size * 0.8, 0);
-        context.stroke();
-        context.restore();
+      leaves.forEach((leaf, index) => {
+        leaf.phase += 0.015 * step;
+        leaf.tumble += leaf.tumbleSpeed * step;
+        leaf.y += leaf.fall * step;
+        leaf.x += (leaf.drift + Math.sin(leaf.phase) * leaf.sway) * step;
+        leaf.rotation += (leaf.spin + Math.cos(leaf.phase) * 0.008) * step;
+        if (leaf.y > height + 40 || leaf.x < -60 || leaf.x > width + 60) {
+          leaves[index] = makeLeaf(false);
+          return;
+        }
+        drawLeaf(leaf);
       });
       frame = requestAnimationFrame(draw);
     };
 
     const run = () => {
-      if (frame === null && visible && !document.hidden) frame = requestAnimationFrame(draw);
+      if (frame === null && !document.hidden) frame = requestAnimationFrame(draw);
     };
     const stop = () => {
       if (frame !== null) cancelAnimationFrame(frame);
       frame = null;
+      last = 0;
     };
 
     resize();
@@ -2755,13 +2913,6 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
       resizeTimer = setTimeout(resize, 150);
     });
     document.addEventListener("visibilitychange", () => (document.hidden ? stop() : run()));
-    if ("IntersectionObserver" in window) {
-      new IntersectionObserver((entries) => {
-        visible = entries[0].isIntersecting;
-        if (visible) run();
-        else stop();
-      }).observe($("#home"));
-    }
     run();
   }
 
@@ -2788,10 +2939,11 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
         background.forEach((element) => element.removeAttribute("inert"));
         setupReveals();
         setupParallax();
-        startPetals();
       }, revealDelay);
 
       setTimeout(() => {
+        const leafFall = $("#leafFall");
+        if (leafFall) document.body.insertBefore(leafFall, $("#siteHeader"));
         intro.classList.add("is-gone");
         intro.setAttribute("aria-hidden", "true");
         const heading = $("#heroTitle");
@@ -2823,7 +2975,6 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
 
   function init() {
     bindContent();
-    buildTorans();
     renderBlessingMessage();
     renderClosingNames();
     renderRsvpContacts();
@@ -2832,6 +2983,7 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
     setupCountdown();
     setupVenue();
     setupIntro();
+    startLeafFall();
     hidePreloader();
   }
 
