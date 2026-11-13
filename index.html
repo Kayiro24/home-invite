@@ -1478,6 +1478,15 @@ body.is-open .site-header { transform: none; }
 }
 @media (min-width: 44em) {
   .rsvp-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rsvp-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc(50% - clamp(1.6rem, 3vw, 2rem) / 2);
+  }
+}
+@media (min-width: 72em) {
+  .rsvp-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 72rem; }
+  .rsvp-card:last-child:nth-child(odd) { grid-column: auto; width: auto; justify-self: stretch; }
 }
 .rsvp-card {
   --sprig-w: clamp(1.8rem, 4.5vw, 2.8rem);
@@ -2058,7 +2067,8 @@ body.is-open .fab-group { opacity: 1; transform: none; pointer-events: auto; }
       note: "Kindly let us know you are coming. Call or WhatsApp us anytime.",
       contacts: [
         { name: "Manish Agrawal", phone: "919329010011", displayPhone: "+91 93290 10011" },
-        { name: "Ayush Agrawal", phone: "919966657000", displayPhone: "+91 99666 57000" }
+        { name: "Ayush Agrawal", phone: "919966657000", displayPhone: "+91 99666 57000" },
+        { name: "Poorva Agrawal", phone: "919926664111", displayPhone: "+91 99266 64111" }
       ]
     },
 
